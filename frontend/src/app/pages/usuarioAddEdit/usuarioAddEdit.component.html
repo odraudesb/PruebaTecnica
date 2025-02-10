@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>{{ data ? 'Editar Usuario' : 'Agregar Nuevo Usuario' }}</h1>
+
+<form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre de Usuario</mat-label>
+      <input matInput formControlName="usuarioNombre" required />
+      <mat-error *ngIf="usuarioForm.get('usuarioNombre')?.hasError('required')">
+        Este campo es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Contraseña</mat-label>
+      <input matInput formControlName="pass" type="password" required minlength="6" />
+      <mat-error *ngIf="usuarioForm.get('pass')?.hasError('required')">
+        Este campo es obligatorio
+      </mat-error>
+      <mat-error *ngIf="usuarioForm.get('pass')?.hasError('minlength')">
+        La contraseña debe tener al menos 6 caracteres
+      </mat-error>
+    </mat-form-field>
+
+  <mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="usuarioForm.invalid">
+      Guardar
+    </button>
+  </mat-dialog-actions>
+</mat-dialog-content>
+</form>

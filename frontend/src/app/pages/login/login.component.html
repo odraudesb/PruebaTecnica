@@ -1,0 +1,26 @@
+<div class="card-container">
+     <mat-card>
+       <mat-card-header>
+         <mat-card-title>Iniciar Sesión</mat-card-title>
+       </mat-card-header>
+       <mat-card-content>
+         <form class="form-custom" [formGroup]="formLogin" (ngSubmit)="iniciarSesion()">
+           <mat-form-field class="input-custom">
+             <mat-label>Usuario</mat-label>
+             <input matInput formControlName="usuarioNombre" [errorStateMatcher]="matcher">
+             <mat-error *ngIf="formLogin.get('usuarioNombre')?.hasError('required')">El usuario es obligatorio.</mat-error>
+           </mat-form-field>
+           <mat-form-field class="input-custom">
+             <mat-label>Clave</mat-label>
+             <input matInput formControlName="pass" type="password" [errorStateMatcher]="matcher">
+             <mat-error *ngIf="formLogin.get('pass')?.hasError('required')">La clave es obligatoria.</mat-error>
+           </mat-form-field>
+           <div class="flex">
+             <button mat-flat-button color="primary" type="submit" [disabled]="formLogin.invalid">Iniciar Sesión</button>
+             <button mat-flat-button color="warn" (click)="registrarse()" style="margin-left:8px">Registrarse</button>
+           </div>
+         </form>
+       </mat-card-content>
+     </mat-card>
+   </div>
+   
